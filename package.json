@@ -1,0 +1,104 @@
+{
+	"name": "vscode-notes",
+	"displayName": "vscode-notes",
+	"description": "An opinionated note taking extension",
+	"version": "0.0.1",
+	"publisher": "samwho",
+	"engines": {
+		"vscode": "^1.31.1"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onView:globalNotes",
+		"onCommand:vscode-notes.new",
+		"onCommand:vscode-notes.delete",
+		"onCommand:vscode-notes.rename",
+		"onCommand:vscode-notes.refresh"
+	],
+	"enableProposedApi": true,
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "notes",
+					"title": "Notes",
+					"icon": "media/sticky-note-solid.svg"
+				}
+			]
+		},
+		"views": {
+			"notes": [
+				{
+					"id": "globalNotes",
+					"name": "Notes"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "vscode-notes.new",
+				"title": "New Note",
+				"category": "vscode-notes",
+				"icon": "media/plus-solid.svg"
+			},
+			{
+				"command": "vscode-notes.delete",
+				"title": "Delete Note",
+				"category": "vscode-notes",
+				"icon": "media/minus-solid.svg"
+			},
+			{
+				"command": "vscode-notes.rename",
+				"title": "Rename Note",
+				"category": "vscode-notes",
+				"icon": "media/pencil-alt-solid.svg"
+			},
+			{
+				"command": "vscode-notes.refresh",
+				"title": "Refresh Notes",
+				"category": "vscode-notes",
+				"icon": "media/sync-alt-solid.svg"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "vscode-notes.new",
+					"when": "view == globalNotes",
+					"group": "navigation"
+				},
+				{
+					"command": "vscode-notes.refresh",
+					"when": "view == globalNotes",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "vscode-notes.rename",
+					"when": "view == globalNotes",
+					"group": "inline"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"@types/mkdirp": "^0.5.2",
+		"@types/node": "*",
+		"tslint": "^5.11.0",
+		"typescript": "^2.1.4",
+		"vscode": "^1.1.30"
+	},
+	"dependencies": {
+		"mkdirp": "^0.5.1"
+	}
+}
